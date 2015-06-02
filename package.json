@@ -1,0 +1,18 @@
+{
+  "name": "saver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "co": "^4.5.4",
+    "co-monk": "^1.0.0",
+    "koa": "^0.21.0",
+    "lodash": "^3.9.3",
+    "monk": "^1.0.1"
+  }
+}
