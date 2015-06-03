@@ -9,13 +9,15 @@ var co = require('co');
 co(function *(){
   var users = wrap(db.get('users'));
 
+  yield users.remove({});
+
   yield [
     users.insert({ name: 'Tobi', species: 'ferret' }),
     users.insert({ name: 'Loki', species: 'ferret' }),
     users.insert({ name: 'Jane', species: 'ferret' })
   ];
 
-  yield users.remove({});
+  //yield users.remove({});
 
 
   var res = yield users.find({});
