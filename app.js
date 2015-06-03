@@ -30,10 +30,6 @@ app.use(session({
 }));
 
 app.use(function *(next){
-    yield next;
-});
-
-app.use(function *(next){
   yield next;
   //this.body = JSON.stringify(this,null,2);
   //this.throw(403);
