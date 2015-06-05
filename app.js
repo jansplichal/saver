@@ -39,6 +39,7 @@ var register = require('./routes/register');
 require('./routes/index')(register('/',app),db);
 require('./routes/logs')(register('/logs',app),db);
 require('./routes/users')(register('/users',app),db);
+require('./routes/expenses')(register('/expenses',app),db);
 
 app.use(statics(__dirname + '/public'));
 
