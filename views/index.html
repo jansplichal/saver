@@ -1,8 +1,7 @@
-<h1>{{ pagename|title }}</h1>
-<ul>
-{% for author in authors %}
-  <li{% if loop.first %} class="first"{% endif %}>
-    {{ author.name }}
-  </li>
-{% endfor %}
-</ul>
+{% extends 'layout.html' %}
+
+{% block title %}Site{% endblock %}
+
+{% block content %}
+  <div>Entry page</div>
+{% endblock %}

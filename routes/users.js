@@ -18,7 +18,7 @@ module.exports = function(router,db){
   router.get('/', function *(next) {
     var usr = yield users.find({});
 
-    this.body = yield this.render('index',{
+    this.body = yield this.render('users/index',{
       pagename: 'My first page',
       authors: usr
     });

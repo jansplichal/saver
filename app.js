@@ -1,5 +1,4 @@
 /*jshint esnext:true*/
-
 var http = require('http');
 var koa = require('koa');
 var logger = require('koa-logger');
