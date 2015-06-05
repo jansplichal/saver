@@ -4,17 +4,13 @@ var http = require('http');
 var koa = require('koa');
 var logger = require('koa-logger');
 
-// session storage middleware
-var session = require('koa-generic-session');
-var redisStore = require('koa-redis');
-
 //mongo
 var monk = require('monk');
 var wrap = require('co-monk');
 
-var router = require('koa-router')();
 var statics = require('koa-static');
 var views = require('koa-render');
+var koaBody = require('koa-body');
 
 var app = koa();
 app.keys = ['saver sekret key', 'to sign cookies'];
@@ -22,12 +18,8 @@ app.env = 'dev';
 
 app.use(logger());
 
-app.use(session({
-  store: redisStore({
-    host:'localhost',
-    port: 6379
-  })
-}));
+var redis = require('./config/redis');
+app.use(redis);
 
 app.use(function *(next){
   yield next;
@@ -35,17 +27,19 @@ app.use(function *(next){
   //this.throw(403);
 });
 
+app.use(koaBody());
+
 app.use(views('./views', {
   map: { html: 'swig' },
   cache: false
 }));
 
-app
-  .use(router.routes())
-  .use(router.allowedMethods());
-
 var db = require('./config/db');
-require('./routes/log')(router,db);
+var register = require('./routes/register');
+
+require('./routes/index')(register('/',app),db);
+require('./routes/logs')(register('/logs',app),db);
+require('./routes/users')(register('/users',app),db);
 
 app.use(statics(__dirname + '/public'));
 

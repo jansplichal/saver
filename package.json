@@ -12,6 +12,7 @@
     "co": "^4.5.4",
     "co-monk": "^1.0.0",
     "koa": "^0.21.0",
+    "koa-body": "^1.2.1",
     "koa-generic-session": "^1.8.0",
     "koa-logger": "^1.2.2",
     "koa-redis": "^1.0.0",
@@ -23,5 +24,8 @@
     "lodash": "^3.9.3",
     "monk": "^1.0.1",
     "swig": "^1.4.2"
+  },
+  "devDependencies": {
+    "supertest": "^1.0.1"
   }
 }
