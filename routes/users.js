@@ -14,11 +14,17 @@ var wrap = require('co-monk');
 
 module.exports = function(router,db){
 
-  router.get('/new', function *(next) {
-
-    this.body = yield this.render('users/form',{
-      pagename: 'My first page'
-    });
-  });
+  router
+    .get('/new', function *(next) {
+      this.body = yield this.render('users/form',{
+        pagename: 'My first page'
+      });
+    })
+    .get('/signin', function *(next) {
+      this.body = yield this.render('users/signin',{
+        pagename: 'My first page'
+      });
+    })
+  ;
 
 };

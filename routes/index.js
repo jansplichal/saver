@@ -15,8 +15,17 @@ var wrap = require('co-monk');
 module.exports = function(router,db){
   var users = wrap(db.get('users'));
 
-  router.get('/', function *(next) {
-    this.redirect('users/new');
-  });
-
+  router
+    .get('/', function *() {
+      this.redirect('users/new');
+    })/*jshint ignore:line*/
+    .get('signin', function*(){
+      this.redirect('users/signin');
+    })/*jshint ignore:line*/
+    .get('help', function*(){
+      console.log('helping');
+      this.body = yield this.render('help',{
+        pagename: 'My first page'
+      });
+    });
 };
