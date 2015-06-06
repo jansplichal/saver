@@ -1,0 +1,11 @@
+{% macro input_errors(errors) %}
+    {% if errors %}
+        <span class="help-block">
+            <ul>
+                {% for error in errors %}
+                <li>{{error.msg}}</li>
+                {% endfor %}
+            </ul>
+        </span>
+    {% endif %}
+{% endmacro %}

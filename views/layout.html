@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>{% block title %}Site{% endblock %}</title>
@@ -7,14 +8,72 @@
   {% block head %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.css">
-  <link rel="stylesheet/less" type="text/css" href="less/main.less">
+  <link rel="stylesheet/less" type="text/css" href="/less/main.less">
   {% endblock %}
 </head>
+
 <body>
-  {% block content %}{% endblock %}
+
+  <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#saver-navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+            <i class="fa fa-money fa-4"></i>
+          </a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="saver-navbar">
+
+          {% if not hide_menu %}
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Recent items <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Goals</a></li>
+            <li><a href="#">Calendar</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Reports <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">By expense type</a></li>
+                <li><a href="#">By months</a></li>
+                <li><a href="#">Goal chart</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Overall summary</a></li>
+
+              </ul>
+            </li>
+          </ul>
+          {% endif %}
+
+          <form class="navbar-form navbar-right" role="login">
+            <a type="button" href="/signin" class="btn btn-default">Sign in</a>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/help">Help</a></li>
+
+            <li>
+
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+
+    {% block content %}{% endblock %}
+  </div>
+  <!-- /.container -->
 
   {% block scripts %}
-  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="/js/main.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -22,4 +81,5 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
   {% endblock %}
 </body>
+
 </html>

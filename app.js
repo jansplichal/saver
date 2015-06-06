@@ -10,6 +10,7 @@ var wrap = require('co-monk');
 var statics = require('koa-static');
 var views = require('koa-render');
 var koaBody = require('koa-body');
+var koaValidate = require('koa-validate');
 
 var app = koa();
 app.keys = ['saver sekret key', 'to sign cookies'];
@@ -27,6 +28,7 @@ app.use(function *(next){
 });
 
 app.use(koaBody());
+app.use(koaValidate());
 
 app.use(views('./views', {
   map: { html: 'swig' },

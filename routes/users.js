@@ -13,14 +13,11 @@ var wrap = require('co-monk');
 
 
 module.exports = function(router,db){
-  var users = wrap(db.get('users'));
 
-  router.get('/', function *(next) {
-    var usr = yield users.find({});
+  router.get('/new', function *(next) {
 
-    this.body = yield this.render('users/index',{
-      pagename: 'My first page',
-      authors: usr
+    this.body = yield this.render('users/form',{
+      pagename: 'My first page'
     });
   });
 
