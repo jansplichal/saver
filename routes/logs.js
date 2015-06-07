@@ -1,6 +1,4 @@
-/*jshint esnext:true*/
 var wrap = require('co-monk');
-
 /*
   GET     /                 ->  list
   GET     /new              ->  new
@@ -10,7 +8,6 @@ var wrap = require('co-monk');
   PUT     /:id              ->  update
   DELETE  /:id              ->  destroy
 */
-
 
 module.exports = function(router,db){
   var users = wrap(db.get('users'));

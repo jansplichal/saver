@@ -1,0 +1,14 @@
+{% extends '../layout.html' %}
+
+{% block title %}Users{% endblock %}
+
+{% block content %}
+  {% for err in errors %}
+    {{ loop.key }}
+  {% endfor %}
+
+  {% for value in values %}
+    {{ value }}
+  {% endfor %}
+
+{% endblock %}

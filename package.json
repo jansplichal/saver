@@ -28,5 +28,10 @@
   },
   "devDependencies": {
     "supertest": "^1.0.1"
+  },
+
+  "jshintConfig":{
+    "esnext"  : true,
+    "noyield" : false
   }
 }

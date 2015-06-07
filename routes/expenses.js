@@ -1,4 +1,3 @@
-/*jshint esnext:true*/
 var wrap = require('co-monk');
 
 /*
@@ -10,8 +9,6 @@ var wrap = require('co-monk');
   PUT     /:id              ->  update
   DELETE  /:id              ->  destroy
 */
-
-
 module.exports = function(router,db){
   var users = wrap(db.get('users'));
 
@@ -23,5 +20,4 @@ module.exports = function(router,db){
       authors: usr
     });
   });
-
 };

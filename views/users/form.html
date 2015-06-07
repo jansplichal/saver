@@ -22,7 +22,7 @@
 
           <div class="form-group {% if errors.saverUsername %}has-error has-feedback{% endif %}">
               <label for="saverUsername">Username</label>
-              <input type="text" aria-describedby="saverUsernameStatus" class="form-control" id="saverUsername" value="{{form.saverUsername}}" name="saverUsername" placeholder="Pick a username">
+              <input type="text" aria-describedby="saverUsernameStatus" class="form-control" id="saverUsername" value="{{form.saverUsername}}" name="name" placeholder="Pick a username">
               {% if errors.saverUsername %}
                   <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                   <span id="saverUsernameStatus"  class="sr-only">(error)</span>
@@ -32,7 +32,7 @@
 
           <div class="form-group {% if errors.saverEmail %}has-error has-feedback{% endif %}">
               <label for="saverEmail">Email</label>
-              <input type="email" aria-describedby="saverEmailStatus" class="form-control" id="saverEmail" name="saverEmail" value="{{form.saverEmail}}" placeholder="Your email">
+              <input type="email" aria-describedby="saverEmailStatus" class="form-control" id="saverEmail" name="email" value="{{form.saverEmail}}" placeholder="Your email">
               {% if errors.saverEmail %}
                   <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                   <span id="saverEmailStatus" class="sr-only">(error)</span>
@@ -42,7 +42,7 @@
 
           <div class="form-group {% if errors.saverPassword %}has-error has-feedback{% endif %}">
               <label for="saverPassword">Password</label>
-              <input type="password" aria-describedby="saverPasswordStatus" class="form-control" id="saverPassword" name="saverPassword" placeholder="Create a password">
+              <input type="password" aria-describedby="saverPasswordStatus" class="form-control" id="saverPassword" name="password" placeholder="Create a password">
               <span class="help-block">Use at least one lowercase letter, one numeral, and seven characters.</span>
                {% if errors.saverPassword %}
               <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
