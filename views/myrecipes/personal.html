@@ -1,0 +1,28 @@
+{% set tab="IF" %}
+{% extends './layout.html' %}
+
+{% block content %}
+  {% parent %}
+  <div class="main-body">
+
+      <div class="first-p">
+        <div>Recipes run automatically in the background</div>
+        <div class="btn-big"><a href="#">Create a recipe</a></div>
+      </div>
+
+      <div class="second-p">
+        You haven’t created any Recipes yet! Check out one of these Recipe Collections to find one you’ll love:
+      </div>
+
+      <div class="third-p">
+        <div class="title">Collections</div>
+        <div class="link"><a href="#">view more</a></div>
+      </div>
+
+      <div class="grid-3">
+        <div>Healthy lifestyle</div>
+        <div>Back to school</div>
+        <div>Nature lover</div>
+      </div>
+  </div>
+{% endblock %}

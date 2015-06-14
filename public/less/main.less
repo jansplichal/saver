@@ -1,23 +1,40 @@
-body { padding-top: 70px; }
+@import "reset.css";
+@import "mixin";
+@import "components";
+@import "myrecipes";
 
-.fa-4 {
-  font-size: 2em
+
+.main-header-nav{
+  .full-width;
+  ul{
+    display: flex;
+    li{
+      padding: 10px;
+      &:first-child{
+        margin-right: auto;
+      }
+      a{
+        text-decoration: none;
+        color: rgb(51, 51, 51);
+        font-size: 110%;
+        font-family:Verdana sans-serif;
+      }
+    }
+  }
 }
 
-.navbar-brand{
-  padding-top: 7px
-}
+.main-footer{
+  background-color: #333;
+  color: #6f6f6f;
+  line-height: 24px;
+  padding: 32px 10px 36px;
+  text-align: center;
 
-.signon-submit{
-  width: 100%
-}
-
-.text-color{
-  color: #79d858;
-}
-
-.help-block ul{
-  /* list-style:none; */
-  padding-left: 15px;
-  margin: 0
+  a {
+    color: #fff;
+    display: inline-block;
+    margin: 4px;
+    padding: 4px;
+    text-decoration: none;
+  }
 }

@@ -4,59 +4,7 @@
 {% block title %}Sign up{% endblock %}
 
 {% block content %}
-<div class="row">
-  <div class="col-md-7">
-      <h1 class="text-color" style="font-size:4em">Save money every day.</h1>
-      <h3 class="heading">
-          Enter your expenses every day and get your finance under control.
-      </h3>
-      <h4 >
-          Create your saving targets and your goals.
-          Track and visualize your endevours and measure and evaluate your saving progress.
-      </h4>
+  <div class="page-header">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum odio, et adipisci incidunt, quos a veniam, error quod sequi modi eaque recusandae cupiditate illum. Consequatur ipsum totam molestias obcaecati tenetur fugit aspernatur cum sint facere doloremque beatae, adipisci saepe qui necessitatibus, quae dolorem sapiente, repellendus voluptas ratione repellat. Numquam debitis voluptate, recusandae fugiat rem rerum necessitatibus.
   </div>
-  <div class="col-md-5">
-
- <!-- <div class="well">...</div> -->
-      <form method="post" action="/users">
-
-          <div class="form-group {% if errors.saverUsername %}has-error has-feedback{% endif %}">
-              <label for="saverUsername">Username</label>
-              <input type="text" aria-describedby="saverUsernameStatus" class="form-control" id="saverUsername" value="{{form.saverUsername}}" name="name" placeholder="Pick a username">
-              {% if errors.saverUsername %}
-                  <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                  <span id="saverUsernameStatus"  class="sr-only">(error)</span>
-              {% endif %}
-              {{ forms.input_errors(errors.saverUsername) }}
-          </div>
-
-          <div class="form-group {% if errors.saverEmail %}has-error has-feedback{% endif %}">
-              <label for="saverEmail">Email</label>
-              <input type="email" aria-describedby="saverEmailStatus" class="form-control" id="saverEmail" name="email" value="{{form.saverEmail}}" placeholder="Your email">
-              {% if errors.saverEmail %}
-                  <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                  <span id="saverEmailStatus" class="sr-only">(error)</span>
-              {% endif %}
-              {{ forms.input_errors(errors.saverEmail) }}
-          </div>
-
-          <div class="form-group {% if errors.saverPassword %}has-error has-feedback{% endif %}">
-              <label for="saverPassword">Password</label>
-              <input type="password" aria-describedby="saverPasswordStatus" class="form-control" id="saverPassword" name="password" placeholder="Create a password">
-              <span class="help-block">Use at least one lowercase letter, one numeral, and seven characters.</span>
-               {% if errors.saverPassword %}
-              <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-              <span id="saverPasswordStatus" class="sr-only">(error)</span>
-              {% endif %}
-              {{ forms.input_errors(errors.saverPassword) }}
-          </div>
-          <div class="form-group">
-              <button type="submit" class="btn btn-default btn-primary signon-submit">Sign up for Money saver</button>
-              <span class="help-block">By clicking "Sign up for Money saver", you agree to our terms of service and privacy policy.</span>
-          </div>
-      </form>
-
-  </div>
-
-</div>
 {% endblock %}

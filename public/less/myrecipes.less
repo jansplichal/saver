@@ -1,0 +1,102 @@
+@import "mixin";
+
+.myrecipes-header{
+  background-color: #f3f3f3;
+
+  .content{
+    .full-width;
+  }
+
+  .heading{
+    font-size: 250%;
+    padding: 20px 10px;
+  }
+
+  .myrecipes-tab{
+    display: flex;
+    width: 500px;
+    li {
+      flex: 1 1 auto;
+      padding: 15px 20px;
+      margin-left: 20px;
+      a{
+        text-decoration: none;
+        text-align: center;
+        display: block;
+        font-size:120%;
+      }
+      background: #dfdfdf none;
+      &.active{
+        background-color: white;
+      }
+    }
+  }
+
+
+}
+
+.main-body{
+  .full-width;
+  font-size:130%;
+  padding: 20px 10px;
+}
+
+.btn-big {
+  padding: 15px 24px 12px;
+  border-radius: 6px;
+  background-color: rgb(51, 204, 255);
+  font-size: 27px;
+  a{
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.first-p{
+  display: flex;
+  padding: 0px 10px 25px 0px;
+  width: 100%;
+    div:first-child{
+      margin-right: auto;
+    }
+}
+
+.second-p{
+  font-size: 130%;
+  padding-bottom: 30px;
+}
+
+.third-p{
+  display: flex;
+  padding: 10px 10px  10px 10px;
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: rgb(243, 243, 243);
+  div:first-child{
+    margin-right: auto;
+  };
+  .title{
+    font-size: 110%;
+    color: rgb(111, 111, 111);
+  };
+  a{ font-size: 90%;text-decoration: none }
+}
+
+
+.grid-3{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  align-content: center;
+  margin-bottom: 70px; 
+
+  & div{
+    flex: 1 1 initial;
+    text-align: center;
+    background-color: lightblue;
+    width: 30%;
+    height: 100px;
+    line-height: 100px;
+  }
+}

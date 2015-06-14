@@ -1,0 +1,21 @@
+{% extends '../layout.html' %} {% block content %}
+<div class="myrecipes-header">
+  <div class="content">
+    <div class="heading">My Recipes</div>
+    <ul class="myrecipes-tab">
+      <li class="{% if tab == 'IF' %}active{% endif %}">
+          <a {% if tab != 'IF' %}href="personal"{% endif %}>IF</a>
+      </li>
+      <li class="{% if tab == 'DO' %}active{% endif %}">
+          <a {% if tab != 'DO' %}href="do"{% endif %}>Do</a>
+      </li>
+      <li class="{% if tab == 'PUB' %}active{% endif %}">
+          <a {% if tab != 'PUB' %}href="published"{% endif %}>Published</a>
+      </li>
+      <li class="{% if tab == 'FAV' %}active{% endif %}">
+          <a {% if tab != 'FAV' %}href="favourites"{% endif %}>Favourites</a>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
