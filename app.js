@@ -8,7 +8,7 @@ var monk = require('monk');
 var wrap = require('co-monk');
 
 var statics = require('koa-static');
-var views = require('koa-render');
+var views = require('koa-views');
 var koaBody = require('koa-body');
 var koaValidate = require('koa-validate');
 
@@ -17,6 +17,13 @@ app.keys = ['saver sekret key', 'to sign cookies'];
 app.env = 'dev';
 
 app.use(logger());
+
+app.use(views('views', {
+  map: {
+    html: 'swig'
+  },
+  cache:false
+}));
 
 var redis = require('./config/redis');
 app.use(redis);
@@ -28,10 +35,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(koaValidate());
-app.use(views('./views', {
-  map: { html: 'swig' },
-  cache: false
-}));
 
 var db = require('./config/db');
 var register = require('./routes/register');
@@ -40,8 +43,8 @@ require('./routes/index')(register('/',app),db,passport);
 
 //Require authentication for now
 app.use(function*(next) {
-  console.log('Executing middleware');
   if (this.isAuthenticated()) {
+    this.state.role = this.passport.user.role;
     yield next
   } else {
     this.redirect('/')

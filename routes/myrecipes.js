@@ -14,7 +14,7 @@ module.exports = function(router,db){
 
   router.get('/personal', function *(next) {
     //var usr = yield users.find({});
-    this.body = yield this.render('myrecipes/personal',{
+    yield this.render('myrecipes/personal',{
       pagename: 'My first page'
       //authors: usr
     });
@@ -22,7 +22,7 @@ module.exports = function(router,db){
 
   router.get('/do', function *(next) {
     //var usr = yield users.find({});
-    this.body = yield this.render('myrecipes/do',{
+    yield this.render('myrecipes/do',{
       pagename: 'My first page'
       //authors: usr
     });
@@ -30,7 +30,7 @@ module.exports = function(router,db){
 
   router.get('/favourites', function *(next) {
     //var usr = yield users.find({});
-    this.body = yield this.render('myrecipes/favourites',{
+    yield this.render('myrecipes/favourites',{
       pagename: 'My first page'
       //authors: usr
     });
@@ -38,7 +38,7 @@ module.exports = function(router,db){
 
   router.get('/published', function *(next) {
     //var usr = yield users.find({});
-    this.body = yield this.render('myrecipes/published',{
+    yield this.render('myrecipes/published',{
       pagename: 'My first page'
       //authors: usr
     });

@@ -2,6 +2,7 @@ var passport = require('koa-passport');
 
 var user = {
   id: 1,
+  role: 'admin',
   username: 'test'
 };
 

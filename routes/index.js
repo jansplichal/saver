@@ -15,8 +15,7 @@ module.exports = function(router,db,passport){
 
   router
     .get('/', function *() {
-      console.log(passport);
-      this.body = yield this.render('users/login')
+      yield this.render('users/login')
     })
     .post('login',
       passport.authenticate('local', {
@@ -30,7 +29,7 @@ module.exports = function(router,db,passport){
     })
     .get('help', function*(){
       console.log('helping');
-      this.body = yield this.render('help',{
+      yield this.render('help',{
         pagename: 'My first page'
       });
     });

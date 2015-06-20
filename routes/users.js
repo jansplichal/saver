@@ -12,7 +12,7 @@ module.exports = function(router, db) {
 
   router
     .get('/new', function*(next) {
-      this.body = yield this.render('users/form', {
+      yield this.render('users/form', {
         pagename: 'My first page'
       });
     })
@@ -27,7 +27,7 @@ module.exports = function(router, db) {
         console.log(this.errors);
         console.log(this.request.body);
 
-        this.body = yield this.render('users/detail', {
+        yield this.render('users/detail', {
           errors: this.errors,
           values: this.body
         });
@@ -36,11 +36,11 @@ module.exports = function(router, db) {
 
     })
     .get('/signin', function*(next) {
-      this.body = yield this.render('users/signin', {
+      yield this.render('users/signin', {
         pagename: 'My first page'
       });
     }).get('/detail', function*(next) {
-      this.body = yield this.render('users/signin', {
+      yield this.render('users/signin', {
         pagename: 'My first page'
       });
     });
