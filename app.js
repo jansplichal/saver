@@ -20,16 +20,14 @@ app.use(logger());
 
 var redis = require('./config/redis');
 app.use(redis);
-
-app.use(function *(next){
-  yield next;
-  //this.body = JSON.stringify(this,null,2);
-  //this.throw(403);
-});
-
 app.use(koaBody());
-app.use(koaValidate());
 
+require('./auth')
+var passport = require('koa-passport')
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use(koaValidate());
 app.use(views('./views', {
   map: { html: 'swig' },
   cache: false
@@ -38,7 +36,18 @@ app.use(views('./views', {
 var db = require('./config/db');
 var register = require('./routes/register');
 
-require('./routes/index')(register('/',app),db);
+require('./routes/index')(register('/',app),db,passport);
+
+//Require authentication for now
+app.use(function*(next) {
+  console.log('Executing middleware');
+  if (this.isAuthenticated()) {
+    yield next
+  } else {
+    this.redirect('/')
+  }
+})
+
 require('./routes/logs')(register('/logs',app),db);
 require('./routes/myrecipes')(register('/myrecipes',app),db);
 require('./routes/users')(register('/users',app),db);

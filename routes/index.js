@@ -10,16 +10,24 @@ var wrap = require('co-monk');
   DELETE  /:id              ->  destroy
 */
 
-module.exports = function(router,db){
+module.exports = function(router,db,passport){
   var users = wrap(db.get('users'));
 
   router
     .get('/', function *() {
-      this.redirect('users/new');
-    })/*jshint ignore:line*/
-    .get('signin', function*(){
-      this.redirect('users/signin');
-    })/*jshint ignore:line*/
+      console.log(passport);
+      this.body = yield this.render('users/login')
+    })
+    .post('login',
+      passport.authenticate('local', {
+        successRedirect: '/myrecipes/personal',
+        failureRedirect: '/'
+      })
+    )
+    .get('logout', function*(next) {
+      this.logout()
+      this.redirect('/')
+    })
     .get('help', function*(){
       console.log('helping');
       this.body = yield this.render('help',{
