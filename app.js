@@ -1,6 +1,7 @@
 /*jshint esnext:true*/
 var http = require('http');
 var koa = require('koa');
+var mount = require('koa-mount');
 var logger = require('koa-logger');
 
 //mongo
@@ -34,6 +35,8 @@ var passport = require('koa-passport')
 app.use(passport.initialize())
 app.use(passport.session())
 
+
+
 app.use(koaValidate());
 
 var db = require('./config/db');
@@ -41,7 +44,6 @@ var register = require('./routes/register');
 
 require('./routes/index')(register('/',app),db,passport);
 
-//Require authentication for now
 app.use(function*(next) {
   if (this.isAuthenticated()) {
     this.state.role = this.passport.user.role;
@@ -50,6 +52,14 @@ app.use(function*(next) {
     this.redirect('/')
   }
 })
+
+app.use(mount('/admin', function *authorize(next){
+  if (this.state.role === 'admin') {
+    yield next;
+  } else {
+    this.redirect('/notauthorized')
+  }
+}));
 
 require('./routes/logs')(register('/logs',app),db);
 require('./routes/myrecipes')(register('/myrecipes',app),db);

@@ -27,8 +27,13 @@ module.exports = function(router,db,passport){
       this.logout()
       this.redirect('/')
     })
+    .get('error', function*(next) {
+      yield this.render('error')
+    })
+    .get('notauthorized', function*(next) {
+      yield this.render('notauthorized')
+    })
     .get('help', function*(){
-      console.log('helping');
       yield this.render('help',{
         pagename: 'My first page'
       });
