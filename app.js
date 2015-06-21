@@ -3,6 +3,8 @@ var http = require('http');
 var koa = require('koa');
 var mount = require('koa-mount');
 var logger = require('koa-logger');
+var locale = require('koa-locale');
+var i18n = require('koa-i18n');
 
 //mongo
 var monk = require('monk');
@@ -19,6 +21,16 @@ app.env = 'dev';
 
 app.use(logger());
 
+locale(app);
+app.use(i18n(app, {
+  directory: './config/locales',
+  locales: ['en','cs'],
+  modes: [
+    'query',
+    'header'
+  ]
+}));
+
 app.use(views('views', {
   map: {
     html: 'swig'
@@ -34,8 +46,6 @@ require('./auth')
 var passport = require('koa-passport')
 app.use(passport.initialize())
 app.use(passport.session())
-
-
 
 app.use(koaValidate());
 
