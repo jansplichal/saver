@@ -34,7 +34,7 @@ function authenticate(db){
       if(!user){
         log.info({'username':username}, "User not found in database");
         done(null, false);
-        throw new Error('Cannot find user with ' + username);
+        throw new Error('Cannot find user with username ' + username);
       }
       var isSame = yield crypt.compare(password,user.password);
       if(!isSame){
