@@ -42,14 +42,15 @@ var redis = require('./config/redis');
 app.use(redis);
 app.use(koaBody());
 
-require('./auth')
+var db = require('./config/db');
+require('./auth')(db)
 var passport = require('koa-passport')
 app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(koaValidate());
 
-var db = require('./config/db');
+
 var register = require('./routes/register');
 
 require('./routes/index')(register('/',app),db,passport);

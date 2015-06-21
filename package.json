@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^0.8.3",
+    "bunyan": "^1.4.0",
     "co": "^4.5.4",
     "co-monk": "^1.0.0",
     "debug": "^2.2.0",
