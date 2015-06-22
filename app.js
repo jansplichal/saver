@@ -5,15 +5,13 @@ var mount = require('koa-mount');
 var logger = require('koa-logger');
 var locale = require('koa-locale');
 var i18n = require('koa-i18n');
-
-//mongo
-var monk = require('monk');
-var wrap = require('co-monk');
-
 var statics = require('koa-static');
 var views = require('koa-views');
 var koaBody = require('koa-body');
 var koaValidate = require('koa-validate');
+var session = require('koa-generic-session');
+var redisStore = require('koa-redis')
+var cfg = require('./config/cfg');
 
 var app = koa();
 app.keys = ['saver sekret key', 'to sign cookies'];
@@ -24,7 +22,7 @@ app.use(logger());
 locale(app);
 app.use(i18n(app, {
   directory: './config/locales',
-  locales: ['en','cs'],
+  locales: ['en', 'cs'],
   modes: [
     'query',
     'header'
@@ -35,47 +33,54 @@ app.use(views('views', {
   map: {
     html: 'swig'
   },
-  cache:false
+  cache: false
 }));
 
-var redis = require('./config/redis');
-app.use(redis);
+app.use(
+  session({
+    store: redisStore({
+      host: cfg.redis.host,
+      port: cfg.redis.port
+    })
+  })
+);
 app.use(koaBody());
 
-var db = require('./config/db');
-require('./auth')(db)
-var passport = require('koa-passport')
-app.use(passport.initialize())
-app.use(passport.session())
+var mongo = require('./middleware/mongo');
+app.use(mongo(cfg.mongo.url));
+
+require('./util/auth');
+var passport = require('koa-passport');
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(koaValidate());
 
+var register = require('./util/register');
 
-var register = require('./routes/register');
-
-require('./routes/index')(register('/',app),db,passport);
+require('./routes/index')(register('/', app),passport);
 
 app.use(function*(next) {
   if (this.isAuthenticated()) {
     this.state.role = this.passport.user.role;
-    yield next
+    yield next;
   } else {
-    this.redirect('/')
+    this.redirect('/');
   }
 })
 
-app.use(mount('/admin', function *authorize(next){
+app.use(mount('/admin', function* authorize(next) {
   if (this.state.role === 'admin') {
     yield next;
   } else {
-    this.redirect('/notauthorized')
+    this.redirect('/notauthorized');
   }
 }));
 
-require('./routes/logs')(register('/logs',app),db);
-require('./routes/myrecipes')(register('/myrecipes',app),db);
-require('./routes/users')(register('/users',app),db);
-require('./routes/expenses')(register('/expenses',app),db);
+require('./routes/logs')(register('/logs', app));
+require('./routes/myrecipes')(register('/myrecipes', app));
+require('./routes/users')(register('/users', app));
+require('./routes/expenses')(register('/expenses', app));
 
 app.use(statics(__dirname + '/public'));
 

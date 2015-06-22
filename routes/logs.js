@@ -1,4 +1,3 @@
-var wrap = require('co-monk');
 /*
   GET     /                 ->  list
   GET     /new              ->  new
@@ -9,10 +8,10 @@ var wrap = require('co-monk');
   DELETE  /:id              ->  destroy
 */
 
-module.exports = function(router,db){
-  var users = wrap(db.get('users'));
+module.exports = function(router){
 
   router.get('/', function *(next) {
+    users = this.use('users');
     var usr = yield users.findOne({});
 
     yield this.render('logs/index',{

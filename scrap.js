@@ -8,11 +8,6 @@ var crypt = require('./util/crypt');
 
 co(function *(){
 
-  // var hash = yield crypt.encrypt("Ahoj lidi");
-  // console.log(hash);
-  // var isSame = yield crypt.compare("Ahoj lidi",hash);
-  // console.log(isSame);
-
   var passwordJan = yield crypt.encrypt('jansplichal');
   var passwordRadek = yield crypt.encrypt('radeksplichal');
 
