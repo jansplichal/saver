@@ -14,11 +14,15 @@ module.exports = function (url, opts) {
   opts = opts || {};
 
   return function *mongo (next) {
-    this.mongo = monk(url);
+    try {
+      this.mongo = monk(url);
 
-    this.use = function(collection){
-      return wrap(this.mongo.get(collection));
-    };
-    yield next;
+      this.use = function(collection){
+        return wrap(this.mongo.get(collection));
+      };
+      yield next;
+    } finally {
+      this.mongo.close();
+    }
   }
 }

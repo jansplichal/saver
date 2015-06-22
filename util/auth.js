@@ -12,7 +12,6 @@ var log = bunyan.createLogger({
   'module': 'auth'
 });
 
-
 var db = monk(cfg.mongo.url);
 var users = wrap(db.get('users'));
 
