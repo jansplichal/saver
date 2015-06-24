@@ -13,7 +13,9 @@ module.exports = function(router, passport){
 
   router
     .get('/', function *() {
-      yield this.render('users/login');
+      yield this.render('users/login', {
+        csrf: this.csrf
+      });
     })
     .post('login',
       passport.authenticate('local', {

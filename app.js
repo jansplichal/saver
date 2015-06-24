@@ -12,12 +12,20 @@ var koaValidate = require('koa-validate');
 var session = require('koa-generic-session');
 var redisStore = require('koa-redis')
 var cfg = require('./config/cfg');
+var stats = require('koa-statsd');
+var csrf = require('koa-csrf');
+var notFound = require('./middleware/pageNotFound');
+var errorPage = require('./middleware/errorPage');
+var compress = require('koa-compress');
 
-var app = koa();
+var app = module.exports = koa();
 app.keys = ['saver sekret key', 'to sign cookies'];
 app.env = 'dev';
 
+app.use(stats());
 app.use(logger());
+app.use(statics(__dirname + '/public'));
+app.use(compress());
 
 locale(app);
 app.use(i18n(app, {
@@ -36,6 +44,9 @@ app.use(views('views', {
   cache: false
 }));
 
+app.use(notFound('404.html'));
+app.use(errorPage('error.html'));
+
 app.use(
   session({
     store: redisStore({
@@ -45,6 +56,8 @@ app.use(
   })
 );
 app.use(koaBody());
+csrf(app)
+app.use(csrf.middleware)
 
 var mongo = require('./middleware/mongo');
 app.use(mongo(cfg.mongo.url));
@@ -70,6 +83,7 @@ app.use(function*(next) {
 })
 
 app.use(mount('/admin', function* authorize(next) {
+  this.throw(500,'Done');
   if (this.state.role === 'admin') {
     yield next;
   } else {
@@ -84,5 +98,13 @@ require('./routes/expenses')(register('/expenses', app));
 
 app.use(statics(__dirname + '/public'));
 
-http.createServer(app.callback()).listen(3000);
-console.log('Listening on port 3000');
+app.on('error', function(err){
+  console.log('Logging', err);
+});
+
+
+if (!module.parent) {
+  var port = process.env.PORT || cfg.port || 3000;
+  http.createServer(app.callback()).listen(port);
+  console.log('Listening on port %d', port);
+}
