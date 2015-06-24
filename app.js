@@ -61,7 +61,6 @@ var register = require('./util/register');
 require('./routes/index')(register('/', app),passport);
 
 app.use(function*(next) {
-  console.log(this.request);
   if (this.isAuthenticated()) {
     this.state.role = this.passport.user.role;
     yield next;

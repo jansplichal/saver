@@ -2,9 +2,7 @@ var passport = require('koa-passport');
 var co = require('co');
 var crypt = require('./crypt');
 var bunyan = require('bunyan');
-var monk = require('monk');
 var wrap = require('co-monk');
-var cfg = require('../config/cfg');
 
 var log = bunyan.createLogger({
   name: "saver"
@@ -12,8 +10,6 @@ var log = bunyan.createLogger({
   'module': 'auth'
 });
 
-var db = monk(cfg.mongo.url);
-var users = wrap(db.get('users'));
 
 passport.serializeUser(function(user, done) {
   log.trace({
@@ -22,8 +18,9 @@ passport.serializeUser(function(user, done) {
   done(null, user._id);
 })
 
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser(function(req, id, done) {
   co(function*() {
+    var users = wrap(req.mongo.get('users'));
     var user = yield users.findOne({
       _id: id
     });
@@ -40,8 +37,9 @@ passport.deserializeUser(function(id, done) {
 })
 
 var LocalStrategy = require('passport-local').Strategy;
-passport.use(new LocalStrategy(function(username, password, done) {
+passport.use(new LocalStrategy({passReqToCallback : true},function(req, username, password, done) {
   co(function*() {
+    var users = wrap(req.mongo.get('users'));
     var user = yield users.findOne({
       'name': username
     });

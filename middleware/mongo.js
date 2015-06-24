@@ -16,7 +16,7 @@ module.exports = function (url, opts) {
   return function *mongo (next) {
     try {
       this.mongo = monk(url);
-
+      this.request.mongo = this.mongo;
       this.use = function(collection){
         return wrap(this.mongo.get(collection));
       };

@@ -61,7 +61,7 @@ co(function *(){
       username: 'jansplichal',
       password: 'jansplichal'
   });
-  for(i=0;i<100;i++){
+  for(i=0;i<10000;i++){
     var result = yield main('http://localhost:3000/myrecipes/personal');
   }
   yield logout('http://localhost:3000/logout');
