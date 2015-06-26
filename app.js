@@ -22,7 +22,6 @@ var log4js = require('log4js');
 
 var app = module.exports = koa();
 app.keys = ['saver sekret key', 'to sign cookies'];
-app.env = 'dev';
 
 app.use(helmet.defaults());
 app.use(stats());
@@ -58,17 +57,24 @@ app.use(
     })
   })
 );
+
 app.use(koaBody());
-csrf(app)
-app.use(csrf.middleware)
+
+if(app.env !== 'test'){
+  csrf(app)
+  app.use(csrf.middleware)
+}
 
 var mongo = require('./middleware/mongo');
 app.use(mongo(cfg.mongo.url));
 
 require('./util/auth');
 var passport = require('koa-passport');
-app.use(passport.initialize());
-app.use(passport.session());
+
+if(app.env !== 'test'){
+  app.use(passport.initialize());
+  app.use(passport.session());
+}
 
 app.use(koaValidate());
 
@@ -76,23 +82,25 @@ var register = require('./util/register');
 
 require('./routes/index')(register('/', app),passport);
 
-app.use(function*(next) {
-  if (this.isAuthenticated()) {
-    this.state.role = this.passport.user.role;
-    yield next;
-  } else {
-    this.redirect('/');
-  }
-})
+if(app.env !== 'test'){
+  app.use(function*(next) {
+    if (this.isAuthenticated()) {
+      this.state.role = this.passport.user.role;
+      yield next;
+    } else {
+      this.redirect('/');
+    }
+  })
 
-app.use(mount('/admin', function* authorize(next) {
-  this.throw(500,'Done');
-  if (this.state.role === 'admin') {
-    yield next;
-  } else {
-    this.redirect('/notauthorized');
-  }
-}));
+  app.use(mount('/admin', function* authorize(next) {
+    this.throw(500,'Done');
+    if (this.state.role === 'admin') {
+      yield next;
+    } else {
+      this.redirect('/notauthorized');
+    }
+  }));
+}
 
 require('./routes/logs')(register('/logs', app));
 require('./routes/myrecipes')(register('/myrecipes', app));
