@@ -1,16 +1,17 @@
 var co = require('co');
 var crypt = require('../util/crypt');
+var should = require('should');
 
 describe("Crypto utilities", function() {
 
   it("generates a bcrypt hash", function(done) {
     co(function *(){
       var hash = yield crypt.encrypt("Ahoj lidi");
-      expect(hash.length).toEqual(60);
+      (hash.length).should.be.exactly(60);
     }).then(function(result){
       done();
     },function(err){
-      expect(err).toBe(undefined);
+      should.fail(err);
       done();
     });
   });
@@ -18,13 +19,13 @@ describe("Crypto utilities", function() {
   it("compares correct hash to true", function(done) {
     co(function *(){
       var hash = yield crypt.encrypt("Ahoj lidi");
-      expect(hash.length).toEqual(60);
-      var result = yield crypt.compare("Ahoj lidi", hash)
-      expect(result).toBe(true);
+      (hash.length).should.be.exactly(60);
+      var result = yield crypt.compare("Ahoj lidi", hash);
+      (result).should.be.true();
     }).then(function(result){
       done();
     },function(err){
-      expect(err).toBe(undefined);
+      should.fail(err);
       done()
     });
   });
@@ -32,17 +33,15 @@ describe("Crypto utilities", function() {
   it("compares wrong hash to false", function(done) {
     co(function *(){
       var hash = yield crypt.encrypt("Ahoj lidi");
-      expect(hash.length).toEqual(60);
+      (hash.length).should.be.exactly(60);
       var result = yield crypt.compare("Ahoj lidicky", hash)
-      expect(result).toBe(false);
+      result.should.be.false();
     }).then(function(result){
       done();
     },function(err){
-      expect(err).toBe(undefined);
+      should.fail(err);
       done();
     });
-
   });
-
 
 });

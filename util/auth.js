@@ -1,15 +1,8 @@
 var passport = require('koa-passport');
 var co = require('co');
 var crypt = require('./crypt');
-var bunyan = require('bunyan');
 var wrap = require('co-monk');
-
-var log = bunyan.createLogger({
-  name: "saver"
-}).child({
-  'module': 'auth'
-});
-
+var log = require('log4js').getLogger("auth");
 
 passport.serializeUser(function(user, done) {
   log.trace({

@@ -1,6 +1,5 @@
 var Router = require('koa-router');
 
-
 module.exports = function(path,app){
   var router = new Router({prefix:path});
   app

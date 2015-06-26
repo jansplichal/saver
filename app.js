@@ -17,11 +17,14 @@ var csrf = require('koa-csrf');
 var notFound = require('./middleware/pageNotFound');
 var errorPage = require('./middleware/errorPage');
 var compress = require('koa-compress');
+var helmet = require('koa-helmet');
+var log4js = require('log4js');
 
 var app = module.exports = koa();
 app.keys = ['saver sekret key', 'to sign cookies'];
 app.env = 'dev';
 
+app.use(helmet.defaults());
 app.use(stats());
 app.use(logger());
 app.use(statics(__dirname + '/public'));
