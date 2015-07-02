@@ -1,3 +1,4 @@
+/*jshint esnext:true*/
 /**
  * page not found handler
  *
@@ -32,4 +33,4 @@
          this.body = 'Page Not Found';
      }
    };
-}
+};

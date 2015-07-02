@@ -5,7 +5,7 @@ var path = require('path');
 var watchLess = require('gulp-watch-less');
 var prefix = require('gulp-autoprefixer');
 var livereload = require('gulp-livereload');
-var nodemon = require('nodemon')
+var nodemon = require('nodemon');
 
 gulp.task('watch', function() {
   gulp.watch('./public/less/*.less', ['less']);

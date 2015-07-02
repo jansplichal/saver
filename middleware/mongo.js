@@ -1,3 +1,4 @@
+/*jshint esnext:true*/
 var monk = require('monk');
 var wrap = require('co-monk');
 var debug = require('debug')('middleware-mongo');
@@ -24,5 +25,5 @@ module.exports = function (url, opts) {
     } finally {
       this.mongo.close();
     }
-  }
-}
+  };
+};

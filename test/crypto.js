@@ -1,3 +1,4 @@
+/*jshint esnext:true*/
 var co = require('co');
 var crypt = require('../util/crypt');
 var should = require('should');
@@ -26,7 +27,7 @@ describe("Crypto utilities", function() {
       done();
     },function(err){
       should.fail(err);
-      done()
+      done();
     });
   });
 
@@ -34,7 +35,7 @@ describe("Crypto utilities", function() {
     co(function *(){
       var hash = yield crypt.encrypt("Ahoj lidi");
       (hash.length).should.be.exactly(60);
-      var result = yield crypt.compare("Ahoj lidicky", hash)
+      var result = yield crypt.compare("Ahoj lidicky", hash);
       result.should.be.false();
     }).then(function(result){
       done();

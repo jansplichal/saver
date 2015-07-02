@@ -1,5 +1,5 @@
+/*jshint esnext:true*/
 var wrap = require('co-monk');
-
 /*
   GET     /                 ->  list
   GET     /new              ->  new
@@ -12,7 +12,7 @@ var wrap = require('co-monk');
 module.exports = function(router){
   router.get('/', function *(next) {
     var users = this.use('users');
-    
+
     var usr = yield users.find({});
     yield this.render('expenses/list',{
       pagename: 'My first page',

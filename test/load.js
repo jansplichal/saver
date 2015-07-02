@@ -1,3 +1,4 @@
+/*jshint esnext:true*/
 var request = require('superagent');
 var co = require('co');
 

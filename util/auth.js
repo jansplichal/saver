@@ -1,3 +1,4 @@
+/*jshint esnext:true*/
 var passport = require('koa-passport');
 var co = require('co');
 var crypt = require('./crypt');
@@ -9,7 +10,7 @@ passport.serializeUser(function(user, done) {
     'user': user
   }, "Serialization succesful");
   done(null, user._id);
-})
+});
 
 passport.deserializeUser(function(req, id, done) {
   co(function*() {
@@ -26,8 +27,8 @@ passport.deserializeUser(function(req, id, done) {
   }, function(err) {
     log.error(err, 'Deserialization failed');
     done(err);
-  })
-})
+  });
+});
 
 var LocalStrategy = require('passport-local').Strategy;
 passport.use(new LocalStrategy({passReqToCallback : true},function(req, username, password, done) {
@@ -60,4 +61,4 @@ passport.use(new LocalStrategy({passReqToCallback : true},function(req, username
     log.error(err, 'Authentication failed');
     done(err);
   });
-}))
+}));

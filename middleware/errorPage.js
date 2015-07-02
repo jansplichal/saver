@@ -1,3 +1,4 @@
+/*jshint esnext:true*/
 /**
  * error page handler
  *
@@ -18,4 +19,4 @@
        this.app.emit('error', err, this);
      }
    };
-}
+};

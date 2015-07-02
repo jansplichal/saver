@@ -42,4 +42,4 @@ function compare(password, hash){
 module.exports = {
   encrypt: encrypt,
   compare: compare
-}
+};

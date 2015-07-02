@@ -10,7 +10,7 @@ var views = require('koa-views');
 var koaBody = require('koa-body');
 var koaValidate = require('koa-validate');
 var session = require('koa-generic-session');
-var redisStore = require('koa-redis')
+var redisStore = require('koa-redis');
 var cfg = require('./config/cfg');
 var stats = require('koa-statsd');
 var csrf = require('koa-csrf');
@@ -61,8 +61,8 @@ app.use(
 app.use(koaBody());
 
 if(app.env !== 'test'){
-  csrf(app)
-  app.use(csrf.middleware)
+  csrf(app);
+  app.use(csrf.middleware);
 }
 
 var mongo = require('./middleware/mongo');
@@ -90,7 +90,7 @@ if(app.env !== 'test'){
     } else {
       this.redirect('/');
     }
-  })
+  });
 
   app.use(mount('/admin', function* authorize(next) {
     this.throw(500,'Done');

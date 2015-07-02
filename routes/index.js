@@ -1,4 +1,4 @@
-
+/*jshint esnext:true*/
 /*
   GET     /                 ->  list
   GET     /new              ->  new
