@@ -15,7 +15,7 @@ module.exports = function(router){
     users = this.use('users');
     var usr = yield users.findOne({});
 
-    yield this.render('logs/index',{
+    yield this.render('settings/index',{
       pagename: 'My first page',
       authors: [usr]
     });

@@ -10,26 +10,26 @@
 */
 module.exports = function(router){
 
-  router.get('/personal', function *(next) {
-    yield this.render('myrecipes/personal',{
+  router.get('/day', function *(next) {
+    yield this.render('myexpenses/day',{
       pagename: 'My first page'
     });
   });
 
-  router.get('/do', function *(next) {
-    yield this.render('myrecipes/do',{
+  router.get('/week', function *(next) {
+    yield this.render('myexpenses/week',{
       pagename: 'My first page'
     });
   });
 
-  router.get('/favourites', function *(next) {
-    yield this.render('myrecipes/favourites',{
+  router.get('/month', function *(next) {
+    yield this.render('myexpenses/month',{
       pagename: 'My first page'
     });
   });
 
-  router.get('/published', function *(next) {
-    yield this.render('myrecipes/published',{
+  router.get('/year', function *(next) {
+    yield this.render('myexpenses/year',{
       pagename: 'My first page'
     });
   });

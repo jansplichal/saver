@@ -19,7 +19,7 @@ module.exports = function(router, passport){
     })
     .post('login',
       passport.authenticate('local', {
-        successRedirect: '/myrecipes/personal',
+        successRedirect: '/myexpenses/day',
         failureRedirect: '/?error=authentication'
       })
     )

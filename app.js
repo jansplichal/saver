@@ -102,10 +102,9 @@ if(app.env !== 'test'){
   }));
 }
 
-require('./routes/logs')(register('/logs', app));
-require('./routes/myrecipes')(register('/myrecipes', app));
+require('./routes/settings')(register('/settings', app));
+require('./routes/myexpenses')(register('/myexpenses', app));
 require('./routes/users')(register('/users', app));
-require('./routes/expenses')(register('/expenses', app));
 
 app.use(statics(__dirname + '/public'));
 

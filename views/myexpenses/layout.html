@@ -1,0 +1,21 @@
+{% extends '../layout.html' %} {% block content %}
+<div class="myexpenses-header">
+  <div class="content">
+    <div class="heading">My Expenses</div>
+    <ul class="myexpenses-tab">
+      <li class="{% if tab == 'Day' %}active{% endif %}">
+          <a {% if tab != 'Day' %}href="day"{% endif %}>Day</a>
+      </li>
+      <li class="{% if tab == 'Week' %}active{% endif %}">
+          <a {% if tab != 'Week' %}href="week"{% endif %}>Week</a>
+      </li>
+      <li class="{% if tab == 'Month' %}active{% endif %}">
+          <a {% if tab != 'Month' %}href="month"{% endif %}>Month</a>
+      </li>
+      <li class="{% if tab == 'Year' %}active{% endif %}">
+          <a {% if tab != 'Year' %}href="year"{% endif %}>Year</a>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
