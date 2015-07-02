@@ -26,7 +26,7 @@ module.exports = function(router, passport){
     .get('logout', function*(next) {
       this.logout();
       this.redirect('/');
-    })
+    })/*jshint ignore:line*/
     .get('error', function*(next) {
       yield this.render('error');
     })

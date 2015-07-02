@@ -1,7 +1,7 @@
 /*jshint esnext:true*/
 var monk = require('monk');
 var wrap = require('co-monk');
-var debug = require('debug')('middleware-mongo');
+//var debug = require('debug')('middleware-mongo');
 
 /**
  * Add mongo to context

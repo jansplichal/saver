@@ -24,7 +24,7 @@ var app = module.exports = koa();
 app.keys = ['saver sekret key', 'to sign cookies'];
 
 app.use(helmet.defaults());
-app.use(stats());
+app.use(stats(cfg.graphite));
 app.use(logger());
 app.use(statics(__dirname + '/public'));
 app.use(compress());
