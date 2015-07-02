@@ -1,11 +1,7 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>koa-passport example</title>
-</head>
-<body>
+{% extends '../layout.html' %}
+{% block title %}Log in{% endblock %}
+
+{% block content %}
   <form action="/login" method="post">
     <input type="hidden" name="_csrf" value="{{csrf}}">
     <p>
@@ -22,5 +18,4 @@
       <button type="submit">Log In</button>
     </p>
   </form>
-</body>
-</html>
+{% endblock %}

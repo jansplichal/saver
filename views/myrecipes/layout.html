@@ -1,19 +1,19 @@
 {% extends '../layout.html' %} {% block content %}
 <div class="myrecipes-header">
   <div class="content">
-    <div class="heading">My Recipes</div>
+    <div class="heading">My Expenses</div>
     <ul class="myrecipes-tab">
       <li class="{% if tab == 'IF' %}active{% endif %}">
-          <a {% if tab != 'IF' %}href="personal"{% endif %}>IF</a>
+          <a {% if tab != 'IF' %}href="personal"{% endif %}>Day</a>
       </li>
       <li class="{% if tab == 'DO' %}active{% endif %}">
-          <a {% if tab != 'DO' %}href="do"{% endif %}>Do</a>
+          <a {% if tab != 'DO' %}href="do"{% endif %}>Week</a>
       </li>
       <li class="{% if tab == 'PUB' %}active{% endif %}">
-          <a {% if tab != 'PUB' %}href="published"{% endif %}>Published</a>
+          <a {% if tab != 'PUB' %}href="published"{% endif %}>Month</a>
       </li>
       <li class="{% if tab == 'FAV' %}active{% endif %}">
-          <a {% if tab != 'FAV' %}href="favourites"{% endif %}>Favourites</a>
+          <a {% if tab != 'FAV' %}href="favourites"{% endif %}>Year</a>
       </li>
     </ul>
   </div>

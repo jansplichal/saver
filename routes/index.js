@@ -13,7 +13,7 @@ module.exports = function(router, passport){
 
   router
     .get('/', function *() {
-      yield this.render('users/login', {
+      yield this.render('users/signin', {
         csrf: this.csrf
       });
     })
@@ -23,6 +23,16 @@ module.exports = function(router, passport){
         failureRedirect: '/?error=authentication'
       })
     )
+    .get('signup', function*(next) {
+      yield this.render('users/signup', {
+        csrf: this.csrf
+      });
+    })
+    .get('signin', function*(next) {
+      yield this.render('users/signin', {
+        csrf: this.csrf
+      });
+    })
     .get('logout', function*(next) {
       this.logout();
       this.redirect('/');

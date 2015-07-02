@@ -5,12 +5,18 @@
 
 .main-header-nav{
   .full-width;
+  .logo{
+    font-size: 47px;
+    padding: 0px 10px
+  }
+
   ul{
     display: flex;
     li{
+      align-self: center;
       padding: 10px;
-      &:first-child{
-        margin-right: auto;
+      &:nth-child(3){
+        flex-grow:10
       }
       a{
         text-decoration: none;
